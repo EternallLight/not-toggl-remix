@@ -89,6 +89,11 @@ export default function Join() {
     <div className="flex min-h-full flex-col justify-center">
       <div className="mx-auto w-full max-w-md px-8">
         <Form method="post" className="space-y-6">
+          <div className={'text-center'}>
+            <img
+              src="https://assets-global.website-files.com/5e0077fc323c6ad205e14177/5e2f07c212d935bb0ffe88c4_logo.svg"
+              loading="lazy" alt="" className="w-full" />
+          </div>
           <div>
             <label
               htmlFor="email"
@@ -146,7 +151,7 @@ export default function Join() {
           <input type="hidden" name="redirectTo" value={redirectTo} />
           <button
             type="submit"
-            className="w-full rounded bg-blue-500  py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400"
+            className="w-full rounded bg-[#a876f5] py-2 px-4 text-white"
           >
             Create Account
           </button>
@@ -156,7 +161,7 @@ export default function Join() {
               <Link
                 className="text-blue-500 underline"
                 to={{
-                  pathname: "/login",
+                  pathname: "/plan/sign-in",
                   search: searchParams.toString(),
                 }}
               >

@@ -5,7 +5,7 @@ import * as React from "react";
 
 import { createUserSession, getUserId } from "~/session.server";
 import { verifyLogin } from "~/models/user.server";
-import { safeRedirect, validateEmail } from "~/utils";
+import { validateEmail } from "~/utils";
 
 export async function loader({ request }: LoaderArgs) {
   const userId = await getUserId(request);
@@ -17,7 +17,7 @@ export async function action({ request }: ActionArgs) {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
-  const redirectTo = safeRedirect(formData.get("redirectTo"), "/notes");
+  const redirectTo = 'https://plan.toggl.com/#timeline';
   const remember = formData.get("remember");
 
   if (!validateEmail(email)) {
@@ -66,7 +66,7 @@ export const meta: MetaFunction = () => {
 
 export default function LoginPage() {
   const [searchParams] = useSearchParams();
-  const redirectTo = searchParams.get("redirectTo") || "/notes";
+  const redirectTo = searchParams.get("redirectTo") || "https://plan.toggl.com/#timeline";
   const actionData = useActionData<typeof action>();
   const emailRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);
@@ -83,6 +83,11 @@ export default function LoginPage() {
     <div className="flex min-h-full flex-col justify-center">
       <div className="mx-auto w-full max-w-md px-8">
         <Form method="post" className="space-y-6">
+          <div className={'text-center'}>
+            <img
+              src="https://assets-global.website-files.com/5e0077fc323c6ad205e14177/5e2f07c212d935bb0ffe88c4_logo.svg"
+              loading="lazy" alt="" className="w-full" />
+          </div>
           <div>
             <label
               htmlFor="email"
@@ -140,7 +145,7 @@ export default function LoginPage() {
           <input type="hidden" name="redirectTo" value={redirectTo} />
           <button
             type="submit"
-            className="w-full rounded bg-blue-500  py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400"
+            className="w-full rounded bg-[#a876f5] py-2 px-4 text-white"
           >
             Log in
           </button>
@@ -164,7 +169,7 @@ export default function LoginPage() {
               <Link
                 className="text-blue-500 underline"
                 to={{
-                  pathname: "/join",
+                  pathname: "/plan/sign-up",
                   search: searchParams.toString(),
                 }}
               >
